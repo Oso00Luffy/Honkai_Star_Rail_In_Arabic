@@ -1,4 +1,4 @@
-# <img src="https://github.com/Oso00Luffy/HSR_Arabia/blob/main/public/logo.png?raw=true" alt="Honkai Arabia" width="64" /> **[Honkai: Star Rail - Library](https://hsr-arabic.vercel.app/)**
+# <img src="https://github.com/Oso00Luffy/Honkai_Star_Rail_In_Arabic/blob/main/public/logo.png?raw=true" alt="Honkai Arabia" width="64" /> **[Honkai: Star Rail - Library](https://hsr-arabic.vercel.app/)**
 
 The Honkai: Star Rail library, **[HSR_ARABIA](https://hsr-arabic.vercel.app)** - a database and companion website for gacha game.
 
@@ -12,14 +12,14 @@ The Honkai: Star Rail library, **[HSR_ARABIA](https://hsr-arabic.vercel.app)** -
 
 ## **Previews**
 
-![preview](https://github.com/Oso00Luffy/HSR_Arabia/blob/main/preview_pics/1.png?raw=true)
-![preview1](https://github.com/Oso00Luffy/HSR_Arabia/blob/main/preview_pics/2.png?raw=true)
-![preview2](https://github.com/Oso00Luffy/HSR_Arabia/blob/main/preview_pics/3.png?raw=true)
-![preview3](https://github.com/Oso00Luffy/HSR_Arabia/blob/main/preview_pics/4.png?raw=true)
-![preview4](https://github.com/Oso00Luffy/HSR_Arabia/blob/main/preview_pics/5.png?raw=true)
-![preview5](https://github.com/Oso00Luffy/HSR_Arabia/blob/main/preview_pics/6.png?raw=true)
-![preview6](https://github.com/Oso00Luffy/HSR_Arabia/blob/main/preview_pics/7.png?raw=true)
-![preview7](https://github.com/Oso00Luffy/HSR_Arabia/blob/main/preview_pics/8.png?raw=true)
+![preview](https://github.com/Oso00Luffy/Honkai_Star_Rail_In_Arabic/blob/main/preview_pics/1.png?raw=true)
+![preview1](https://github.com/Oso00Luffy/Honkai_Star_Rail_In_Arabic/blob/main/preview_pics/2.png?raw=true)
+![preview2](https://github.com/Oso00Luffy/Honkai_Star_Rail_In_Arabic/blob/main/preview_pics/3.png?raw=true)
+![preview3](https://github.com/Oso00Luffy/Honkai_Star_Rail_In_Arabic/blob/main/preview_pics/4.png?raw=true)
+![preview4](https://github.com/Oso00Luffy/Honkai_Star_Rail_In_Arabic/blob/main/preview_pics/5.png?raw=true)
+![preview5](https://github.com/Oso00Luffy/Honkai_Star_Rail_In_Arabic/blob/main/preview_pics/6.png?raw=true)
+![preview6](https://github.com/Oso00Luffy/Honkai_Star_Rail_In_Arabic/blob/main/preview_pics/7.png?raw=true)
+![preview7](https://github.com/Oso00Luffy/Honkai_Star_Rail_In_Arabic/blob/main/preview_pics/8.png?raw=true)
 
 ---
 
