@@ -36,7 +36,7 @@ const bottomText = (
     </>
 );
 
-const githubURL = "HSR_Arabia";
+const githubURL = "Honkai_Star_Rail_In_Arabic";
 
 function NavBottom() {
     const theme = useTheme();
