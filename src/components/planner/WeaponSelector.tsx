@@ -14,11 +14,12 @@ import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import { selectWeapons } from "reducers/weapon";
 import { getSelectedWeapons, setPlannerWeapons } from "reducers/planner";
 import { getBackgroundColor, getRarityColor } from "helpers/rarityColors";
+import { getCalyxMaterial } from "data/materials/calyxMaterials";
+import { getCommonMaterial } from "data/materials/commonMaterials";
 
 // Type imports
 import { Weapon } from "types/weapon";
 import { WeaponCostObject } from "types/costs";
-import { CommonMaterial, CalyxMaterial } from "types/materials";
 
 function WeaponSelector() {
     const theme = useTheme();
@@ -42,6 +43,7 @@ function WeaponSelector() {
             multiple
             autoComplete
             filterSelectedOptions
+            disableClearable
             options={options}
             getOptionLabel={(option) => option.displayName}
             filterOptions={(options, { inputValue }) =>
@@ -58,9 +60,18 @@ function WeaponSelector() {
             noOptionsText="No Light Cones"
             value={values}
             isOptionEqualToValue={(option, value) => option.name === value.name}
-            onChange={(_: any, newValue: WeaponCostObject[] | null) =>
-                dispatch(setPlannerWeapons(newValue as WeaponCostObject[]))
-            }
+            onChange={(event, newValue: WeaponCostObject[] | null, reason) => {
+                if (
+                    event.type === "keydown" &&
+                    ((event as React.KeyboardEvent).key === "Backspace" ||
+                        (event as React.KeyboardEvent).key === "Delete") &&
+                    reason === "removeOption"
+                ) {
+                    return;
+                }
+                dispatch(setPlannerWeapons(newValue as WeaponCostObject[]));
+            }}
+            renderTags={() => null}
             renderInput={(params) => (
                 <SearchBar
                     params={params}
@@ -138,10 +149,12 @@ function createOptions(weapons: Weapon[]) {
     return weapons.map(
         (wep) =>
             ({
+                id: `weapon_${wep.id}`,
                 name: wep.name,
                 displayName: wep.displayName,
                 rarity: wep.rarity,
                 path: wep.path,
+                release: wep.release,
                 costs: {
                     credits: {
                         Credit: 0,
@@ -152,16 +165,32 @@ function createOptions(weapons: Weapon[]) {
                         WeaponXP3: 0,
                     },
                     calyxMat: {
-                        [`${wep.materials.calyxMat}1` as CalyxMaterial]: 0,
-                        [`${wep.materials.calyxMat}2` as CalyxMaterial]: 0,
-                        [`${wep.materials.calyxMat}3` as CalyxMaterial]: 0,
+                        [getCalyxMaterial({
+                            tag: `${wep.materials.calyxMat}1`,
+                        })?.id!]: 0,
+                        [getCalyxMaterial({
+                            tag: `${wep.materials.calyxMat}2`,
+                        })?.id!]: 0,
+                        [getCalyxMaterial({
+                            tag: `${wep.materials.calyxMat}3`,
+                        })?.id!]: 0,
                     },
                     commonMat: {
-                        [`${wep.materials.commonMat}1` as CommonMaterial]: 0,
-                        [`${wep.materials.commonMat}2` as CommonMaterial]: 0,
-                        [`${wep.materials.commonMat}3` as CommonMaterial]: 0,
+                        [getCommonMaterial({
+                            tag: `${wep.materials.commonMat}1`,
+                        })?.id!]: 0,
+                        [getCommonMaterial({
+                            tag: `${wep.materials.commonMat}2`,
+                        })?.id!]: 0,
+                        [getCommonMaterial({
+                            tag: `${wep.materials.commonMat}3`,
+                        })?.id!]: 0,
                     },
                 },
+                values: {
+                    level: {},
+                },
+                dataFormat: "v2",
             } as WeaponCostObject)
     );
 }
