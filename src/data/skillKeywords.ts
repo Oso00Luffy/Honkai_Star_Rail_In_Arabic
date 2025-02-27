@@ -16,6 +16,11 @@ export const skillKeywords: SkillKeywords = {
         description:
             "Causes the target being hit to take extra DMG, which is not considered an attack.",
     },
+    backup: {
+        name: "Backup",
+        description:
+            "Enemies cannot actively target backup units. Allies' Blast-type abilities cannot Blast to backup units.",
+    },
     "base chance": {
         name: "Base Chance",
         description:
@@ -71,12 +76,12 @@ export const skillKeywords: SkillKeywords = {
         description: "Fixed chance will not be affected by any factor.",
     },
     "follow up attack": {
-        name: "Follow-Up Attack",
+        name: "Follow-up ATK",
         description:
             "Unleashes an extra attack on the target. This effect is triggered automatically when requirements are met.",
     },
     "joint attack": {
-        name: "Joint Attack",
+        name: "Joint ATK",
         description:
             "Multiple targets respectively use attacks on enemy targets in one action.",
     },
@@ -94,6 +99,11 @@ export const skillKeywords: SkillKeywords = {
         name: "Super Break DMG",
         description:
             "Super Break DMG increases with higher Break Effect, higher Toughness Reduction of the attack, and higher character levels.<br />Super Break DMG cannot CRIT hit and is not affected by DMG Boost effects.",
+    },
+    territory: {
+        name: "Territory",
+        description:
+            "Territory effects are unique in the battle. While it exists, other abilities with Territory effects cannot be used.",
     },
     "true dmg": {
         name: "True DMG",

@@ -1,60 +1,90 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { startAppListening } from "helpers/hooks";
 import { RootState } from "rtk/store";
-import { Path, Rarity } from "types/_common";
-import { CalyxMaterial, CommonMaterial } from "types/materials";
+import { ThemeNames } from "types/theme";
+import { Region } from "helpers/dates";
 
-export interface WeaponFilterState {
-    path: Path[];
-    rarity: Rarity[];
-    calyxMat: CalyxMaterial[];
-    commonMat: CommonMaterial[];
+export type Width = "standard" | "wide";
+export type SkillDisplay = "slider" | "table";
+
+export interface SettingsState {
+    theme: ThemeNames;
+    width: Width;
+    skillDisplay: SkillDisplay;
+    server: Region;
+    unreleasedContent: boolean;
 }
 
-const initialState: WeaponFilterState = {
-    path: [],
-    rarity: [],
-    calyxMat: [],
-    commonMat: [],
+const storedSettings = localStorage.getItem("settings") || "{}";
+
+const { theme, width, skillDisplay, server, unreleasedContent } =
+    JSON.parse(storedSettings);
+
+const initialState: SettingsState = {
+    theme: theme || "Dark",
+    width: width || "standard",
+    skillDisplay: skillDisplay || "slider",
+    server: server || "NA",
+    unreleasedContent: unreleasedContent || false,
 };
 
-export const weaponFilterSlice = createSlice({
-    name: "characterFilters",
+export const settingsSlice = createSlice({
+    name: "settings",
     initialState,
     reducers: {
-        setPath: (state, action: PayloadAction<Path[]>) => {
-            state.path = action.payload;
+        setSettings: (state, action: PayloadAction<SettingsState>) => {
+            Object.assign(state, action.payload);
         },
-        setRarity: (state, action: PayloadAction<Rarity[]>) => {
-            state.rarity = action.payload;
+        setTheme: (state, action: PayloadAction<ThemeNames>) => {
+            state.theme = action.payload;
         },
-        setCalyxMat: (state, action: PayloadAction<CalyxMaterial[]>) => {
-            state.calyxMat = action.payload;
+        setWidth: (state, action: PayloadAction<Width>) => {
+            state.width = action.payload;
         },
-        setCommonMat: (state, action: PayloadAction<CommonMaterial[]>) => {
-            state.commonMat = action.payload;
+        setSkillDisplay: (state, action: PayloadAction<SkillDisplay>) => {
+            state.skillDisplay = action.payload;
         },
-        clearFilters: (
-            state,
-            action: PayloadAction<keyof WeaponFilterState | undefined>
-        ) => {
-            if (!action.payload) {
-                return initialState;
-            } else {
-                state[action.payload] = [];
-            }
+        setServer: (state, action: PayloadAction<Region>) => {
+            state.server = action.payload;
+        },
+        toggleUnreleasedContent: (state) => {
+            state.unreleasedContent = !state.unreleasedContent;
         },
     },
 });
 
-export const { setPath, setRarity, setCalyxMat, setCommonMat, clearFilters } =
-    weaponFilterSlice.actions;
+export const {
+    setSettings,
+    setTheme,
+    setWidth,
+    setSkillDisplay,
+    setServer,
+    toggleUnreleasedContent,
+} = settingsSlice.actions;
 
-export const selectWeaponFilters = (state: RootState): WeaponFilterState =>
-    state.weaponFilters;
-export const activeWeaponFilters = (state: RootState): boolean =>
-    Object.keys(state.weaponFilters).filter(
-        (filter) =>
-            state.weaponFilters[filter as keyof WeaponFilterState].length
-    ).length > 0;
+export const selectSettings = (state: RootState): SettingsState =>
+    state.settings;
+export const selectTheme = (state: RootState): ThemeNames =>
+    state.settings.theme;
+export const selectWidth = (state: RootState): Width => state.settings.width;
+export const selectSkillDisplay = (state: RootState): SkillDisplay =>
+    state.settings.skillDisplay;
+export const selectServer = (state: RootState): Region => state.settings.server;
+export const selectUnreleasedContent = (state: RootState): boolean =>
+    state.settings.unreleasedContent;
 
-export default weaponFilterSlice.reducer;
+export default settingsSlice.reducer;
+
+startAppListening({
+    actionCreator: setSettings,
+    effect: (action) => {
+        localStorage.setItem("settings", JSON.stringify(action.payload));
+        window.dispatchEvent(new Event("storage"));
+    },
+});
+
+window.addEventListener("storage", (event) => {
+    if (event.key === "settings") {
+        window.location.reload();
+    }
+});
