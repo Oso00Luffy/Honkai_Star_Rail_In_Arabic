@@ -64,7 +64,7 @@ function Countdown(props: { date: DateObject }) {
                     </StyledTooltip>
                 </>
             ) : (
-                <>لقد انتهى البنر</>
+                <>Banner has ended</>
             )}
         </TextStyled>
     );
